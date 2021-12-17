@@ -1,0 +1,72 @@
+{
+  "version": "1.0",
+  "envId": "{{env.ENV_ID}}",
+  "framework": {
+    "name": "Pagekit",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "pagekit",
+          "servicePath": "/",
+          "uploadType": "image",
+          "cpu": 1,
+          "mem": 2,
+          "imageInfo": {
+            "imageUrl": "ccr.ccs.tencentyun.com/tcbimages/pagekit-tcb:1.0.0"
+          },
+          "containerPort": 80,
+          "envVariables": {
+            "PAGEKIT_DB_HOST": "{{env.DB_IP}}:{{env.DB_PORT}}",
+            "PAGEKIT_DB_NAME": "{{env.DB_NAME}}",
+            "PAGEKIT_DB_USERNAME": "{{env.MYSQL_USERNAME}}",
+            "PAGEKIT_DB_PASSWORD": "{{env.MYSQL_PASSWORD}}",
+            "PAGEKIT_USERNAME": "{{env.ADMIN_USER}}",
+            "PAGEKIT_PASSWORD": "{{env.ADMIN_PASSWORD}}",
+            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.pagekit.Properties.InstanceId}"
+          },
+          "initialDelaySeconds": 10,
+          "volumeMounts": {
+            "/var/www/html": "pagekit-cfs",
+            "/var/log/nginx": "pagekit-log"
+          }
+        }
+      }
+    },
+    "requirement": {
+      "addons": [
+        {
+          "type": "CFS",
+          "name": "pagekit-cfs"
+        },
+        {
+          "type": "CFS",
+          "name": "pagekit-log"
+        },
+        {
+          "type": "CynosDB",
+          "name": "pagekit",
+          "envMap": {
+            "IP": "DB_IP",
+            "PORT": "DB_PORT",
+            "NAME": "pagekit",
+            "USERNAME": "MYSQL_USERNAME",
+            "PASSWORD": "MYSQL_PASSWORD"
+          }
+        }
+      ],
+      "environment": {
+        "ADMIN_USER": {
+          "description": "用户名",
+          "required": true,
+          "default": "admin"
+        },
+        "ADMIN_PASS": {
+          "description": "用户密码",
+          "required": true,
+          "default": "admin@123"
+        }
+      }
+    }
+  }
+}

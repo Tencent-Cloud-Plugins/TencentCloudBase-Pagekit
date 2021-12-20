@@ -18,7 +18,7 @@
           "containerPort": 80,
           "envVariables": {
             "PAGEKIT_DB_HOST": "{{env.DB_IP}}:{{env.DB_PORT}}",
-            "PAGEKIT_DB_NAME": "{{env.DB_NAME}}",
+            "PAGEKIT_DB_NAME": "pagekit",
             "PAGEKIT_DB_USERNAME": "{{env.MYSQL_USERNAME}}",
             "PAGEKIT_DB_PASSWORD": "{{env.MYSQL_PASSWORD}}",
             "PAGEKIT_USERNAME": "{{env.ADMIN_USER}}",
@@ -50,7 +50,6 @@
           "envMap": {
             "IP": "DB_IP",
             "PORT": "DB_PORT",
-            "NAME": "pagekit",
             "USERNAME": "MYSQL_USERNAME",
             "PASSWORD": "MYSQL_PASSWORD"
           }

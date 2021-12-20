@@ -22,8 +22,9 @@
             "PAGEKIT_DB_USERNAME": "{{env.MYSQL_USERNAME}}",
             "PAGEKIT_DB_PASSWORD": "{{env.MYSQL_PASSWORD}}",
             "PAGEKIT_USERNAME": "{{env.ADMIN_USER}}",
-            "PAGEKIT_PASSWORD": "{{env.ADMIN_PASSWORD}}",
-            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.pagekit.Properties.InstanceId}"
+            "PAGEKIT_PASSWORD": "{{env.ADMIN_PASS}}",
+            "TCB_NOT_SHOW_CYNOS_DB": "${Outputs.pagekit.Properties.InstanceId}",
+            "PAGEKIT_LOCALE": "zh_CN"
           },
           "initialDelaySeconds": 10,
           "volumeMounts": {
